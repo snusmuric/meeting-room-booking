@@ -1,0 +1,38 @@
+---
+spring:
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: qwe123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    show-sql: true
+
+logging:
+  level:
+    meeting.booking.server: info
+
+---
+spring:
+  profiles: dev
+  logging:
+    level:
+      meeting.booking.server: debug
+      org.springframework.web: debug
+
+  # Templates reloading during development
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+    cache: false
+
+  # Static resources reloading during development
+  resources:
+    static-locations: file:src/main/resources/static/
+    cache:
+      period: 0s
