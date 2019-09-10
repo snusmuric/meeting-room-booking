@@ -18,37 +18,50 @@
         <java.version>1.8</java.version>
         <downloadSources>true</downloadSources>
         <downloadJavadocs>true</downloadJavadocs>
+        <springBootVersion>2.1.7.RELEASE</springBootVersion>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${springBootVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+            <version>${springBootVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${springBootVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springBootVersion}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.liquibase</groupId>-->
-        <!--<artifactId>liquibase-core</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase.ext</groupId>
+            <artifactId>liquibase-hibernate5</artifactId>
+            <version>3.8</version>
+        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>42.2.6</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+            <version>${springBootVersion}</version>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
@@ -56,11 +69,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${springBootVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
+            <version>5.1.6.RELEASE</version>
             <scope>test</scope>
         </dependency>
 
@@ -78,8 +93,36 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springBootVersion}</version>
             </plugin>
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>liquibaseDiff</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>liquibase.integration.commandline.Main</argument>
+                                <argument>
+                                    --changeLogFile=${project.basedir}/src/main/resources/db/changelog/changelog_${maven.build.timestamp}.sql
+                                </argument>
+                                <argument>--defaultsFile=${project.basedir}/liquibase-diff.properties</argument>
+                                <argument>diffChangeLog</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
