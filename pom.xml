@@ -51,6 +51,7 @@
             <groupId>org.liquibase.ext</groupId>
             <artifactId>liquibase-hibernate5</artifactId>
             <version>3.8</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -114,7 +115,7 @@
                                 <classpath/>
                                 <argument>liquibase.integration.commandline.Main</argument>
                                 <argument>
-                                    --changeLogFile=${project.basedir}/src/main/resources/db/changelog/changelog_${maven.build.timestamp}.sql
+                                    --changeLogFile=${project.basedir}/src/main/resources/db/changelog/changelog_${maven.build.timestamp}.postgresql.sql
                                 </argument>
                                 <argument>--defaultsFile=${project.basedir}/liquibase-diff.properties</argument>
                                 <argument>diffChangeLog</argument>

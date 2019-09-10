@@ -1,8 +1,8 @@
 # Meeting Room Booking Service
 
-## How to Build and Install 
+### Development
 
-### Dev
+#### Database
 1. To generate Liquibase changeset
  
  - copy liquibase-diff-example.properties to liquibase-diff.properties,
@@ -11,4 +11,4 @@
 mvn exec:exec -PliquibaseDiff
 ```
 - rename resulting sql file to XXX - \<meaningful changeset name\>.sql
-- add changeset file to liquibase master file: the db.changelog-master.xml
+- add changeset file to the liquibase master file: db.changelog-master.xml
