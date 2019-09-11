@@ -1,42 +1,40 @@
 <html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 >
-  <head>
+<head>
     <div th:fragment="header-css">
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"
-      />
+        <link
+                rel="stylesheet"
+                type="text/css"
+                href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+        />
 
-      <link
-        rel="stylesheet"
-        th:href="@{/css/main.css}"
-        href="../../static/css/main.css"
-      />
+        <link
+                rel="stylesheet"
+                th:href="@{/css/main.css}"
+                href="../../static/css/main.css"
+        />
     </div>
-  </head>
-  <body>
-    <div th:fragment="header">
-      <nav class="navbar navbar-inverse">
+</head>
+<body>
+<div th:fragment="header">
+    <nav class="navbar navbar-inverse">
         <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" th:href="@{/}"
-              >Meeting Room Booking System</a
-            >
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a th:href="@{/}">Home</a></li>
-            </ul>
-            <span sec:authorize="isAuthenticated()">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}" th:text="#{service.name}"></a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/}">Home</a></li>
+                </ul>
+                <span sec:authorize="isAuthenticated()">
               Logged user: <span sec:authentication="name"></span>
               <a th:href="@{/logout}">Sign Out</a>
             </span>
-          </div>
+            </div>
         </div>
-      </nav>
-    </div>
-  </body>
+    </nav>
+</div>
+</body>
 </html>
