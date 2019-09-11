@@ -12,6 +12,7 @@ spring:
     hibernate:
       ddl-auto: validate
     properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    open-in-view: false
     show-sql: true
 
   liquibase:
@@ -19,15 +20,23 @@ spring:
 
 logging:
   level:
-    meeting.booking.server: info
-
+    meeting.booking.server: INFO
+server:
+  error:
+    whitelabel:
+      enabled: true
 ---
 spring:
   profiles: dev
-  logging:
-    level:
-      meeting.booking.server: debug
-      org.springframework.web: debug
+
+logging:
+  file: logs/dev_app.log
+  pattern:
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+#    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    meeting.booking.server: DEBUG
 
   # Templates reloading during development
   thymeleaf:
@@ -39,3 +48,17 @@ spring:
     static-locations: file:src/main/resources/static/
     cache:
       period: 0s
+
+---
+
+spring:
+  profiles: prod
+
+logging:
+  file: logs/prod_app.log
+  pattern:
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    org.springframework.web: WARN
+    meeting.booking.server: INFO
+---

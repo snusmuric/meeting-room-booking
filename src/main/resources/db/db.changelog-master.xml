@@ -7,5 +7,6 @@
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <include file="db/changelog/001 - create-tables.sql"/>
+    <include file="db/changelog/002 - add-users.sql"/>
 
 </databaseChangeLog>

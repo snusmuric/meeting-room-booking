@@ -1,26 +1,35 @@
 --liquibase formatted sql
 
---changeset serg:1568134444664-1
+--changeset serg:1568196277766-1
+CREATE TABLE authority (
+  id   SERIAL      NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  CONSTRAINT "authorityPK" PRIMARY KEY (id)
+);
+
+--changeset serg:1568196277766-2
 CREATE TABLE "user" (
-  id            SERIAL       NOT NULL,
-  first_name    VARCHAR(255),
-  last_name     VARCHAR(255),
-  password_hash VARCHAR(255) NOT NULL,
-  username      VARCHAR(255) NOT NULL,
+  id         SERIAL      NOT NULL,
+  enabled    BOOLEAN     NOT NULL,
+  first_name VARCHAR(255),
+  last_name  VARCHAR(255),
+  login      VARCHAR(50) NOT NULL,
+  password   VARCHAR(60) NOT NULL,
   CONSTRAINT "userPK" PRIMARY KEY (id)
 );
 
---changeset serg:1568134444664-2
-CREATE TABLE user_role (
-  user_id SERIAL NOT NULL,
-  role    VARCHAR(255)
+--changeset serg:1568196277766-3
+CREATE TABLE user_authority (
+  user_id      SERIAL NOT NULL,
+  authority_id SERIAL NOT NULL,
+  CONSTRAINT USER_AUTHORITY_PKEY PRIMARY KEY (user_id, authority_id)
 );
 
---changeset serg:1568134444664-3
-ALTER TABLE "user"
-  ADD CONSTRAINT UC_USERUSERNAME_COL UNIQUE (username);
+--changeset serg:1568196277766-5
+ALTER TABLE user_authority
+  ADD CONSTRAINT "FK_user_authority_authority" FOREIGN KEY (authority_id) REFERENCES authority (id);
 
---changeset serg:1568134444664-4
-ALTER TABLE user_role
-  ADD CONSTRAINT "FK_user_role_user" FOREIGN KEY (user_id) REFERENCES "user" (id);
+--changeset serg:1568196277766-6
+ALTER TABLE user_authority
+  ADD CONSTRAINT "FK_user_authority_user" FOREIGN KEY (user_id) REFERENCES "user" (id);
 
