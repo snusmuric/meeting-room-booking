@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Meeting Room Booking System Error</title>
+    <div th:replace="fragments/header :: header-css"></div>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .container {
+            display: table;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+        }
+
+        .inner-container {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="inner-container">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Unexpected Error</h4>
+            <p>Whoops, something went wrong...</p>
+            <hr>
+            <p class="mb-0">Please try again later</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
