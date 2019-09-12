@@ -8,14 +8,14 @@ CREATE TABLE authority (
 );
 
 --changeset serg:1568196277766-2
-CREATE TABLE "user" (
+CREATE TABLE "app_user" (
   id         SERIAL      NOT NULL,
   enabled    BOOLEAN     NOT NULL,
   first_name VARCHAR(255),
   last_name  VARCHAR(255),
   login      VARCHAR(50) NOT NULL,
-  password   VARCHAR(60) NOT NULL,
-  CONSTRAINT "userPK" PRIMARY KEY (id)
+  password   VARCHAR(255) NOT NULL,
+  CONSTRAINT "appUserPK" PRIMARY KEY (id)
 );
 
 --changeset serg:1568196277766-3
@@ -31,5 +31,5 @@ ALTER TABLE user_authority
 
 --changeset serg:1568196277766-6
 ALTER TABLE user_authority
-  ADD CONSTRAINT "FK_user_authority_user" FOREIGN KEY (user_id) REFERENCES "user" (id);
+  ADD CONSTRAINT "FK_user_authority_app_user" FOREIGN KEY (user_id) REFERENCES "app_user" (id);
 

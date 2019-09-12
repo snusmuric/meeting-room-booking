@@ -7,12 +7,12 @@ commit;
 
 --changeset serg:1568198447624-2
 -- passwor: 'passwd', encryption: bcrypt
-INSERT INTO "user" (id, login, enabled, first_name, last_name, password)
-VALUES (1, 'JohnDoe', true, 'John', 'Doe', '$2y$12$3ywaZ1TNNHznqmajkCTV0.UIAu7ffU6H7L65VCMoI5BDthY0jNdTe');
-INSERT INTO "user" (id, login, enabled, first_name, last_name, password)
-VALUES (2, 'Ivanov', true, 'Ivan', 'Ivanov', '$2y$12$3ywaZ1TNNHznqmajkCTV0.UIAu7ffU6H7L65VCMoI5BDthY0jNdTe');
-INSERT INTO "user" (id, login, enabled, first_name, last_name, password)
-VALUES (3, 'user', true, 'Some', 'User', '$2y$12$3ywaZ1TNNHznqmajkCTV0.UIAu7ffU6H7L65VCMoI5BDthY0jNdTe');
+INSERT INTO "app_user" (id, login, enabled, first_name, last_name, password)
+VALUES (1, 'JohnDoe', true, 'John', 'Doe', '$2a$10$Uznw2Y3NPr8P/OMayrEG1.U5SHiYe6nFvCQRPv1n//hEgZ0yYrQ1O');
+INSERT INTO "app_user" (id, login, enabled, first_name, last_name, password)
+VALUES (2, 'Ivanov', true, 'Ivan', 'Ivanov', '$2a$10$Uznw2Y3NPr8P/OMayrEG1.U5SHiYe6nFvCQRPv1n//hEgZ0yYrQ1O');
+INSERT INTO "app_user" (id, login, enabled, first_name, last_name, password)
+VALUES (3, 'user', true, 'Some', 'User', '$2a$10$Uznw2Y3NPr8P/OMayrEG1.U5SHiYe6nFvCQRPv1n//hEgZ0yYrQ1O');
 commit;
 
 --changeset serg:1568198447624-3
