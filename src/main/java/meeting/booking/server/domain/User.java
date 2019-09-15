@@ -95,8 +95,9 @@ public class User extends BaseEntityImpl {
     @Override
     public String toString() {
         return "User{" +
-                "login='" + login + '\'' +
-                ", enabled=" + enabled +
+                "id='" + getId() + '\'' +
+                ", login='" + login + '\'' +
+                ", enabled=" + enabled + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", authorities=" + authorities +
