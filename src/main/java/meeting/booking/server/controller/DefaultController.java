@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DefaultController {
 
     @GetMapping("/")
-    public String home1() {
-        return "home";
+    public String root() {
+        return "redirect:/home";
     }
 
     @GetMapping("/home")
