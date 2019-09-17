@@ -1,6 +1,9 @@
 package meeting.booking.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import meeting.booking.server.Constants;
 
 import javax.persistence.*;
@@ -13,10 +16,16 @@ import java.util.Set;
 /**
  * A user.
  */
+@EqualsAndHashCode(of = {"id"})
+@ToString(exclude = {"authorities"})
+@Data
 @Table(name = "app_user")
 @Entity
-public class User extends BaseEntityImpl {
-    private static final long serialVersionUID = 1L;
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long id;
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -26,7 +35,7 @@ public class User extends BaseEntityImpl {
 
     @JsonIgnore
     @NotNull
-    @Column(name = "password_hash", nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @NotNull
@@ -37,70 +46,10 @@ public class User extends BaseEntityImpl {
 
     private String lastName;
 
-    private Set<Authority> authorities = new HashSet<>();
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Authority.class)
     @JoinTable(
             name = "user_authority",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id")})
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + getId() + '\'' +
-                ", login='" + login + '\'' +
-                ", enabled=" + enabled + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", authorities=" + authorities +
-                '}';
-    }
+    private Set<Authority> authorities = new HashSet<>();
 }

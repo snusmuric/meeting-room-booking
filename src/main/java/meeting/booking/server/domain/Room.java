@@ -1,14 +1,21 @@
 package meeting.booking.server.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@EqualsAndHashCode(of = {"id"})
+@Data
 @Entity
-public class Room extends BaseEntityImpl {
+public class Room {
 
-    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long id;
 
     @Column(length = 50, nullable = false)
     @Size(min = 1, max = 50)
@@ -16,20 +23,4 @@ public class Room extends BaseEntityImpl {
     private String name;
 
     private String location;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 }

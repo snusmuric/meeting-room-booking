@@ -18,6 +18,13 @@ spring:
   liquibase:
     change-log: 'classpath:db/db.changelog-master.xml'
 
+  resources:
+    add-mappings: false
+  jackson:
+    default-property-inclusion: non_null
+  mvc:
+    throw-exception-if-no-handler-found: true
+
 logging:
   level:
     meeting.booking.server: INFO

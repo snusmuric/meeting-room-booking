@@ -1,52 +1,27 @@
 package meeting.booking.server.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 /**
  * An authority (a security role) used by Spring Security.
  */
+@EqualsAndHashCode(of = {"id"})
+@Data
 @Entity
-public class Authority extends BaseEntityImpl {
+public class Authority {
 
-    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long id;
 
     @NotNull
     @Size(max = 50)
     @Column(length = 50, unique = true)
     private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Authority)) {
-            return false;
-        }
-        return Objects.equals(name, ((Authority) o).name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(name);
-    }
-
-    @Override
-    public String toString() {
-        return "Authority{" +
-                "name='" + name + '\'' +
-                "}";
-    }
 }
