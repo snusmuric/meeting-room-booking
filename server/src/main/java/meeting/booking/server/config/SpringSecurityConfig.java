@@ -1,5 +1,6 @@
 package meeting.booking.server.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,16 +23,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
         .authorizeRequests()
-            .antMatchers("/api/**").authenticated()
-            .antMatchers("/index.html").authenticated()
-            .antMatchers("/webjars/**","/css/**").permitAll()
-            .antMatchers("/**").authenticated()
+            .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+        .anyRequest()
+            .fullyAuthenticated()
         .and()
             .formLogin()
             .loginPage("/login")
             .permitAll()
         .and()
             .logout()
+            .invalidateHttpSession(true)
             .permitAll();
     }
 }
