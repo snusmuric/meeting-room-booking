@@ -8,13 +8,14 @@ public class DefaultController {
 
     @GetMapping("/")
     public String root() {
-        return "redirect:/home";
+//        return "redirect:/home";
+        return "index.html";
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
+//    @GetMapping("/home")
+//    public String home() {
+//        return "index.html";
+//    }
 
     @GetMapping("/login")
     public String login() {
