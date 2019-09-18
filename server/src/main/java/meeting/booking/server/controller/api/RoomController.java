@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RequestMapping("/api")
 @RestController
 public class RoomController {
     private RoomService roomService;

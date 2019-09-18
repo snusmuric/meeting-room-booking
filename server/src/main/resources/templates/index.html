@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="#{service.name}"></title>
+    <div th:replace="fragments/header :: header-css"></div>
+  </head>
+  <body>
+    <div class="alert alert-warning" role="alert">Please, use frontend's module
+      <strong>npm run serve</strong>
+      in order to start dev server and generate static resources.
+      It will accessible at
+      <a href="http://localhost:8081">http://localhost:8081</a>
+    </div>
+  </body>
+</html>
